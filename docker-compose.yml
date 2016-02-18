@@ -1,0 +1,26 @@
+es1:
+  build: elasticsearch
+  restart: always
+  hostname: es1
+  links:
+    - es2
+  ports:
+    - 9201:9200
+    - 9301:9300
+  environment:
+    - ES_NODE_NAME=es1
+    - ES_CLUSTER_NAME=elasticsearch-local
+  volumes:
+    - /data-volume/elastic-cluster/elastic1:/usr/share/elasticsearch/data
+es2:
+  build: elasticsearch
+  restart: always
+  hostname: es2
+  ports:
+    - 9202:9200
+    - 9302:9300
+  environment:
+    - ES_NODE_NAME=es2
+    - ES_CLUSTER_NAME=elasticsearch-local
+  volumes:
+    - /data-volume/elastic-cluster/elastic2:/usr/share/elasticsearch/data  
